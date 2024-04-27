@@ -40,19 +40,17 @@ class DeliveryTest {
         $("[data-test-id=name] input").setValue(validUser.getName());
         $("[data-test-id=phone] input").setValue(validUser.getPhone());
         $("[data-test-id=agreement]").click();
-        $("button.button").click();
         $(byText("Запланировать")).click();
         $(byText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
-        $("[data-test-id=success-notification]")
-                .shouldHave(exactText("Встреча успешно забронирована на " + firstMeetingDate))
-                .shouldBe(visible);
+        $(".notification__content")
+                .shouldBe(visible, Duration.ofSeconds(15))
+                .shouldHave(Condition.exactText("Встреча успешно запланирована на " + firstMeetingDate));
         $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue(secondMeetingDate);
         $("button.button").click();
         $(byText("Перепланировать")).click();
         $(byText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
-        $("[data-test-id=success-notification]")
-                .shouldBe(visible)
-                .shouldHave(exactText("Встреча успешно забронирована на " + secondMeetingDate));
+        $("[data-test-id=success-notification]").shouldHave(exactText("Успешно!\n" +
+                "Встреча успешно запланирована на " + secondMeetingDate));
     }
 }

@@ -28,14 +28,14 @@ public class DataGenerator {
     public static String generateName(String locale) {
         // TODO: добавить логику для объявления переменной name и задания её значения, для генерации можно
         // использовать Faker
-        var faker = new Faker(new Locale("ru"));
+        var faker = new Faker(new Locale(locale));
         return faker.name().lastName() + " " + faker.name().firstName();
     }
 
     public static String generatePhone(String locale) {
         // TODO: добавить логику для объявления переменной phone и задания её значения, для генерации можно
         // использовать Faker
-        var faker = new Faker(new Locale("ru"));
+        var faker = new Faker(new Locale(locale));
         String phone = faker.phoneNumber().cellPhone();
         return phone;
     }
